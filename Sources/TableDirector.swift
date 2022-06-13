@@ -426,6 +426,14 @@ extension TableDirector {
         }
         return self
     }
+
+    @discardableResult
+    open func reloadSection(section: TableSection, with animation: UITableView.RowAnimation = .automatic) -> Self {
+        guard let sectionInd = sections.firstIndex(where: { $0 === section }) else { return self }
+        sections[sectionInd] = section
+        tableView?.reloadSections([sectionInd], with: animation)
+        return self
+    }
     
     @discardableResult
     open func delete(sectionAt index: Int) -> Self {
